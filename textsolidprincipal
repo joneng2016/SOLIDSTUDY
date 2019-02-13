@@ -2,5 +2,62 @@ S.O.L.I.D é um acronimo para os cinco princícios de design atrelados a orienta
 
 Esses princícpios, quando combinados, tornam o desenvolvimento de software algo fácil de ser mantido e estendido. Esses princípios também evitam a formação de códigos ruins, permitem uma rápida refatoração do código, e também fazem parte de uma forma ágil e adaptativa de desenvolvimento de software. 
 
+S.O.L.I.D é padrão para;
 
-S.O.L.I.D stands for: << parou em
+O Acrônimo, quando expandido, pode parecer ser algo complicado, contudo é bem fácil de entender;
+
+S - Princípio da Responabilidade Única.
+O - Princípio da Abertura e Fechamento. 
+L - Princípio de substituição de Liskov. 
+I - Princípio da segregação de interface. 
+D - Princípio da Inversão de Dependência. 
+
+Se faz necessário olhar para cada um desses princípios de forma individual para compreender porque eles são tão importantes. 
+
+S - Princípio da Responabilidade Única.
+
+A classe deve ter apenas uma única razão para mudar, significa que a classe deve ter apenas uma única função. 
+
+Por exemplo, suponha que temos uma certa configuração e nós precisamos que o sol irradie para todas as áreas. Isso parece ser bem simples.  
+
+class Circle {
+    public $radius;
+
+    public function construct($radius) {
+        $this->radius = $radius;
+    }
+}
+
+class Square {
+    public $length;
+
+    public function construct($length) {
+        $this->length = $length;
+    }
+}
+
+Nós criamos as classes de configuração e se tem construtores que solicitam um dado parâmetro. Pŕoximo, se cria a classe AreaCalculator com a seguinte lógica.   
+
+class AreaCalculator {
+
+    protected $shapes;
+
+    public function __construct($shapes = array()) {
+        $this->shapes = $shapes;
+    }
+
+    public function sum() {
+        // logic to sum the areas
+    }
+
+    public function output() {
+        return implode('', array(
+            "",
+                "Sum of the areas of provided shapes: ",
+                $this->sum(),
+            ""
+        ));
+    }
+}
+
+Parou em To Use AreaCalculator...
