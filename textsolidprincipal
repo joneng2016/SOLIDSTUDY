@@ -60,4 +60,40 @@ class AreaCalculator {
     }
 }
 
-Parou em To Use AreaCalculator...
+Para usar a classe AreaCalculator, nós simplesmente devemos instanciar a classe em um array na estrutura da configuração, como mostrado a seguir; 
+
+$shape = array(
+    new Circle(2),
+    new Square(5),
+    new Square(6)
+);
+
+$areas = new AreaCalculator($shape);
+
+echo $areas->output();
+
+
+O problema com o método output é que a classe AreaCalculator tem um dado carga de lógica e de dados. Então o que o usuário deseja como saída, um json ou algo deste gênero? 
+
+Toda essa lógica deve ser uma alça para classe de AreaCalculator, que é contra isso que o SRP desaprova. Então para resolver esse problema se faz necessário ter uma uma classe que trabalhe
+com esses retornos. 
+
+$shapes = array(
+    new Circle(2),
+    new Square(5),
+    new Square(6)
+);
+
+$areas = new AreaCalculator($shapes);
+$output = new SumCalculatorOutputter($areas);
+
+echo $output->JSON();
+echo $output->HAML();
+echo $output->HTML();
+echo $output->JADE();
+
+Agora a forma do retorno está relacionado com a classe SumCalculatorOutputter.
+
+
+
+Open-closed Principle
