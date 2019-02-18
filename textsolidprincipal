@@ -97,3 +97,38 @@ Agora a forma do retorno está relacionado com a classe SumCalculatorOutputter.
 
 
 Open-closed Principle
+
+Os objetos devem ser abertos para para extensões, mas fechado para modificações. 
+
+Isso simplesmente significa que uma classe deve ser facilmente extensível sem que seja modificada. Vamos ver a classe AreaCalculator, especialmente o método de soma; 
+
+public function sum() {
+    foreach($this->shapes as $shape) {
+        if(is_a($shape, 'Square')) {
+            $area[] = pow($shape->length, 2);
+        } else if(is_a($shape, 'Circle')) {
+            $area[] = pi() * pow($shape->radius, 2);
+        }
+    }
+
+    return array_sum($area);
+}
+
+Se nós queremos o método esteja habilitado para soma de áreas de formas diferentes, nós devemos adicionar mais um bloco if/else e isso será contra o princípio Open/Close.
+
+O método de soma pode ser melhorado se a logica para calcular a área for removida da forma do método de soma e se for atachada na forma da classe.
+
+class Square {
+    public $length;
+
+    public function __construct($length) {
+        $this->length = $length;
+    }
+
+    public function area() {
+        return pow($this->length, 2);
+    }
+}
+
+>>>> The same thing should be done for the Circle class, an area method should be added. Now, to calculate the sum of any shape provided should be as simple as:
+
