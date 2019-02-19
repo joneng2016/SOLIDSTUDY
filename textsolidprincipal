@@ -130,5 +130,32 @@ class Square {
     }
 }
 
->>>> The same thing should be done for the Circle class, an area method should be added. Now, to calculate the sum of any shape provided should be as simple as:
+public function sum() {
+    foreach($this->shapes as $shape) {
+        $area[] = $shape->area();
+    }
 
+    return array_sum($area);
+}
+
+Agora nós queremos outra forma de classe e passar isto quando calculado a soma sem uma dada quebra de código. Contudo, agora outros problemas surgem, como nós sabemos que o objeto passado é AreaCalculator é de fato uma forma ou se a forma tem um método para calcular área. 
+
+Código para realizar a interface é uma parte integral do SOLID, um rápido exemplo é uma criação de interface, que todo formato é implementado; 
+
+interface ShapeInterface {
+    public function area();
+}
+
+class Circle implements ShapeInterface {
+    public $radius;
+
+    public function __construct($radius) {
+        $this->radius = $radius;
+    }
+
+    public function area() {
+        return pi() * pow($this->radius, 2);
+    }
+}
+
+"In our AreaCalculator sum method we can check if the shapes provided are actually instances of the ShapeInterface, otherwise we throw an exception:"
