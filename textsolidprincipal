@@ -159,3 +159,39 @@ class Circle implements ShapeInterface {
 }
 
 "In our AreaCalculator sum method we can check if the shapes provided are actually instances of the ShapeInterface, otherwise we throw an exception:"
+
+public function sum() {
+    foreach($this->shapes as $shape) {
+        if(is_a($shape, 'ShapeInterface')) {
+            $area[] = $shape->area();
+            continue;
+        }
+
+        throw new AreaCalculatorInvalidShapeException;
+    }
+
+    return array_sum($area);
+}
+
+Liskov Substitution Principle
+
+Sendo que q(x) é um propriedade provada do objeto x tipo T. Então q(y) deve ser provada para objetos y do tipo S onde S é um subtipo de T. 
+
+Tudo isso está afirmado é que tudo será classe subclass/derived deveria ser substituível por base/pai das classer. 
+
+Ainda fazendo uso da classe AreaCalculator, pode-se dizer que existe uma classe chamada de VolumeCalculator que é filha da AreaCalculator.
+
+class VolumeCalculator extends AreaCalulator {
+    public function construct($shapes = array()) {
+        parent::construct($shapes);
+    }
+
+    public function sum() {
+        // logic to calculate the volumes and then return and array of output
+        return array($summedData);
+    }
+}
+
+In the SumCalculatorOutputter class:
+
+
