@@ -192,6 +192,48 @@ class VolumeCalculator extends AreaCalulator {
     }
 }
 
-In the SumCalculatorOutputter class:
+Na classe SumCalculatorOutputter: 
+
+class SumCalculatorOutputter {
+    protected $calculator;
+
+    public function __constructor(AreaCalculator $calculator) {
+        $this->calculator = $calculator;
+    }
+
+    public function JSON() {
+        $data = array(
+            'sum' => $this->calculator->sum();
+        );
+
+        return json_encode($data);
+    }
+
+    public function HTML() {
+        return implode('', array(
+            '',
+                'Sum of the areas of provided shapes: ',
+                $this->calculator->sum(),
+            ''
+        ));
+    }
+}
+
+Se nós tentarmos rodas esse exemplo, fica assim; 
 
 
+$areas = new AreaCalculator($shapes);
+$volumes = new AreaCalculator($solidShapes);
+
+$output = new SumCalculatorOutputter($areas);
+$output2 = new SumCalculatorOutputter($volumes);
+
+O programa não está "grito", mas quando nós chamamos o método html no objeto $outut2, nó pegamos um erro de E_NOTICE informando sobre a conversão da string. 
+Para resolver isso, em vez de retornar um array para o VolumeCalculator, nós podemos realizar a seguinte simplificação; 
+
+public function sum() {
+    // logic to calculate the volumes and then return and array of output
+    return $summedData;
+}
+
+A soma dos dados como um float, double ou integer. 
